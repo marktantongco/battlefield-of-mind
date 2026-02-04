@@ -1,0 +1,11 @@
+.cache
+.git
+.rovodev
+.ssh
+.terraform.d
+.local
+darkdump
+personal-seo
+node_modules
+*.log
+.env.local
