@@ -18,6 +18,11 @@ export async function getPosts(params?: {
   tags?: string
   search?: string
 }): Promise<SimplifiedPost[]> {
+  // If no WordPress URL is configured, return empty array
+  if (!WP_API_URL) {
+    return []
+  }
+  
   // Check cache
   if (postsCache && Date.now() - postsCache.timestamp < CACHE_DURATION * 1000) {
     return postsCache.data
@@ -142,6 +147,12 @@ function stripHtml(html: string): string {
  * Get all post slugs for static generation
  */
 export async function getAllPostSlugs(): Promise<string[]> {
+  // If no WordPress URL is configured, return empty array (skip WordPress integration)
+  if (!WP_API_URL) {
+    console.log('No WordPress API URL configured, skipping post fetching')
+    return []
+  }
+  
   try {
     const response = await axios.get<WordPressPost[]>(
       `${WP_API_URL}/posts?per_page=100&_fields=slug`
