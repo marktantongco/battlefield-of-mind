@@ -2,7 +2,8 @@
 const nextConfig = {
   // No output mode for Vercel - use default server mode
   images: {
-    unoptimized: true,
+    unoptimized: false,
+    formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,9 +16,17 @@ const nextConfig = {
     ],
   },
   trailingSlash: true,
-  // Ensure we use the correct SWC binary
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   experimental: {
-    forceSwcTransforms: false,
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 }
 

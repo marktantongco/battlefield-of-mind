@@ -1,53 +1,29 @@
-import { MetadataRoute } from 'next'
-import { getAllPostSlugs } from '@/lib/wordpress'
+import { MetadataRoute } from 'next';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourusername.github.io'
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://mindscape-ai.vercel.app';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Get all post slugs
-  const postSlugs = await getAllPostSlugs()
+export default function sitemap(): MetadataRoute.Sitemap {
+  const routes = [
+    '',
+    '/battlefield',
+    '/mood-tracker',
+    '/ai-tools',
+    '/about',
+    '/blog',
+    '/categories',
+    '/seo-guide',
+    '/monetization',
+    '/support',
+    '/contact',
+    '/privacy-policy',
+    '/terms-of-service',
+    '/affiliate-disclosure',
+  ].map((route) => ({
+    url: `${siteUrl}${route}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: route === '' ? 'daily' as const : 'weekly' as const,
+    priority: route === '' ? 1 : 0.8,
+  }));
 
-  // Static pages
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: `${SITE_URL}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/categories`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/ai-tools`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-  ]
-
-  // Dynamic blog post pages
-  const blogPages: MetadataRoute.Sitemap = postSlugs.map((slug) => ({
-    url: `${SITE_URL}/blog/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
-
-  return [...staticPages, ...blogPages]
+  return routes;
 }

@@ -3,19 +3,13 @@ import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { Analytics } from '@/components/Analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'MindScape AI - Transform & Create',
-  description: 'Where mental transformation meets AI-powered creativity. A synergized platform for personal growth and content innovation.',
-  keywords: ['mental health', 'personal growth', 'AI tools', 'content creation', 'battlefield of mind', 'transformation'],
-  openGraph: {
-    title: 'MindScape AI - Transform Your Mind, Create with AI',
-    description: 'Where mental transformation meets AI-powered creativity',
-    type: 'website',
-  },
-}
+import { defaultMetadata } from '@/lib/seo'
+
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
@@ -23,11 +17,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <Analytics />
-        {children}
-        <VercelAnalytics />
+        <ThemeProvider>
+          <Analytics />
+          {children}
+          <VercelAnalytics />
+        </ThemeProvider>
       </body>
     </html>
   )

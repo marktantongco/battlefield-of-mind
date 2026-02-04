@@ -76,3 +76,14 @@ const config: Config = {
 }
 
 export default config
+
+// Add JIT mode optimizations
+export const mode = 'jit';
+
+// Purge unused styles in production
+export const purge = {
+  enabled: process.env.NODE_ENV === 'production',
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+};

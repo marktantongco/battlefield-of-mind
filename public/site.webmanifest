@@ -1,20 +1,20 @@
 {
-  "name": "AI Blog Platform",
-  "short_name": "AI Blog",
-  "description": "AI-powered blog for Philippine creators",
+  "name": "MindScape AI",
+  "short_name": "MindScape",
+  "description": "Transform your mind and create with AI",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "theme_color": "#3b82f6",
+  "theme_color": "#9333ea",
   "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/"

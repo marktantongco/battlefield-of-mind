@@ -3,11 +3,13 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Brain, Sparkles, BookOpen, Home } from 'lucide-react';
+import { Menu, X, Brain, Sparkles, BookOpen, Home, Moon, Sun } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,8 +22,8 @@ export function Navigation() {
   const navLinks = [
     { href: '/', label: 'Home', icon: Home },
     { href: '/battlefield', label: 'Battlefield', icon: Brain },
-    { href: '/ai-tools', label: 'AI Tools', icon: Sparkles },
-    { href: '/blog', label: 'Blog', icon: BookOpen },
+    { href: '/mood-tracker', label: 'Mood Tracker', icon: Sparkles },
+    { href: '/ai-tools', label: 'AI Tools', icon: BookOpen },
   ];
 
   return (
@@ -83,13 +85,28 @@ export function Navigation() {
             })}
           </div>
 
-          {/* CTA Button */}
-          <Link
-            href="/battlefield"
-            className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            Start Journey
-          </Link>
+          {/* Theme Toggle & CTA */}
+          <div className="hidden md:flex items-center space-x-3">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleTheme}
+              className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-yellow-500" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-700" />
+              )}
+            </motion.button>
+            <Link
+              href="/battlefield"
+              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+            >
+              Start Journey
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -131,6 +148,22 @@ export function Navigation() {
                   </Link>
                 );
               })}
+              <button
+                onClick={toggleTheme}
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group w-full"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun className="w-5 h-5 text-yellow-500" />
+                    <span className="text-base font-medium text-gray-700 dark:text-gray-300">Light Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon className="w-5 h-5 text-gray-600" />
+                    <span className="text-base font-medium text-gray-700 dark:text-gray-300">Dark Mode</span>
+                  </>
+                )}
+              </button>
               <Link
                 href="/battlefield"
                 onClick={() => setIsMobileMenuOpen(false)}
