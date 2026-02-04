@@ -1,0 +1,7 @@
+> [debug] [2026-02-04T09:12:30.118Z] Found config in file "/root/vercel.json"
+Vercel CLI 50.10.0
+> [debug] [2026-02-04T09:12:30.170Z] user supplied a possible target for deployment or an extension
+> [debug] [2026-02-04T09:12:30.202Z] failed to find extension command with name "vercel---prod"
+? You are deploying your home directory. Do you want to continue? (y/N)[73G
+[?25h> [debug] [2026-02-04T09:12:30.314Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-04T09:12:30.353Z] #1 → GET https://api.vercel.com/v2/user

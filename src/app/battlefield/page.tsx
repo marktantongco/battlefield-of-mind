@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { saveProgress, loadProgress } from "@/lib/storage";
 import { trackEvent } from "@/components/Analytics";
+import { Navigation } from "@/components/Navigation";
+import { ArrowRight, ArrowLeft, Sparkles, Check, Download, Share2 } from "lucide-react";
 
 export default function BattlefieldPage() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -29,7 +31,6 @@ export default function BattlefieldPage() {
     if (saved.missionProclamation) setMissionProclamation(saved.missionProclamation);
     if (saved.fundOfKnowledge) setFundOfKnowledge(saved.fundOfKnowledge);
     
-    // Track page view
     trackEvent('battlefield_visit', { section: 'initial' });
   }, []);
 
@@ -47,288 +48,10 @@ export default function BattlefieldPage() {
     saveProgress(progress);
   }, [currentSection, culpritThought, reframedThought, cleanupStep, missionProclamation, fundOfKnowledge]);
 
-  const sections = [
-    {
-      title: "The Battlefield of the Mind",
-      icon: "🧠",
-      color: "from-amber-500 to-orange-600",
-      content: (
-        <>
-          <p className="text-lg leading-relaxed mb-6">
-            Personal conflict is primarily fought in the <span className="font-bold">"battlefield of the mind,"</span> where entrenched patterns of thinking, or <span className="font-bold">"strongholds,"</span> lead to suspicion, doubt, and fear. To resolve these conflicts effectively, you must move from a <span className="font-bold">"victim" mentality</span>—blaming external circumstances—to an <span className="font-bold">"owner" mentality</span>, taking 100% accountability for your impact on the relationship.
-          </p>
-          
-          <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6 mb-8">
-            <h3 className="text-xl font-bold text-amber-300 mb-4 flex items-center">
-              <span className="mr-2">🔍</span> Identify the Internal Root
-            </h3>
-            <p className="text-slate-300 mb-4">
-              Most conflicts are fueled by <span className="font-semibold">"wilderness mentalities"</span> such as blame-shifting or deterministic thinking. These mentalities trap you in cycles of frustration because they deny you the power to change the solution.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-slate-400 mb-2">What "culprit thought" is currently occupying your mind?</label>
-                <input
-                  type="text"
-                  value={culpritThought}
-                  onChange={(e) => setCulpritThought(e.target.value)}
-                  placeholder="e.g., 'I'm damaged goods', 'My past defines me'"
-                  className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-slate-400 mb-2">Reframe this thought with truth:</label>
-                <input
-                  type="text"
-                  value={reframedThought}
-                  onChange={(e) => setReframedThought(e.target.value)}
-                  placeholder="e.g., 'I am fearfully and wonderfully made', 'My future is built on hope'"
-                  className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-amber-300 mb-4 flex items-center">
-              <span className="mr-2">🔄</span> Shift from Content to Process
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-bold text-red-400 mb-2 flex items-center">
-                  <span className="mr-2">❌</span> Avoid "You" Statements
-                </h4>
-                <ul className="space-y-2 text-slate-300">
-                  <li>• "You&apos;re being ridiculous"</li>
-                  <li>• "You always do this"</li>
-                  <li>• "You never listen"</li>
-                </ul>
-                <p className="text-slate-400 mt-3 italic">These act as a "wagging finger" and evoke defensiveness.</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-emerald-400 mb-2 flex items-center">
-                  <span className="mr-2">✅</span> Replace with "I" Statements
-                </h4>
-                <ul className="space-y-2 text-slate-300">
-                  <li>• "I&apos;m having difficulty understanding"</li>
-                  <li>• "I feel concerned when..."</li>
-                  <li>• "I need clarity on..."</li>
-                </ul>
-                <p className="text-slate-400 mt-3 italic">These foster safety and open dialogue.</p>
-              </div>
-            </div>
-          </div>
-        </>
-      )
-    },
-    {
-      title: "The Cleanup Process",
-      icon: "🧼",
-      color: "from-blue-500 to-cyan-600",
-      content: (
-        <>
-          <p className="text-lg leading-relaxed mb-6">
-            To repair a relationship where damage has been done, use this structured four-step process. This moves the conflict from a <span className="font-bold">"broken record"</span> of blame to a <span className="font-bold">"winning story"</span> of shared recovery.
-          </p>
-          
-          <div className="space-y-6">
-            {[{
-              step: 1,
-              title: "Apologize",
-              placeholder: "I sincerely apologize for...",
-              key: "apologize"
-            }, {
-              step: 2,
-              title: "Own the Impact",
-              placeholder: "I take 100% accountability for the effect my actions had on you...",
-              key: "impact"
-            }, {
-              step: 3,
-              title: "Make a Promise",
-              placeholder: "In the future, I will...",
-              key: "promise"
-            }, {
-              step: 4,
-              title: "Recommit",
-              placeholder: "Our relationship is important to me because...",
-              key: "recommit"
-            }].map((item) => (
-              <div key={item.step} className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-                <div className="flex items-start mb-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-1">
-                    <span className="font-bold text-blue-300">{item.step}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-blue-300">{item.title}</h3>
-                </div>
-                <textarea
-                  value={cleanupStep[item.key as keyof typeof cleanupStep]}
-                  onChange={(e) => setCleanupStep(prev => ({...prev, [item.key]: e.target.value}))}
-                  placeholder={item.placeholder}
-                  className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 min-h-[100px] text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-8 p-6 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border border-blue-800/50 rounded-xl">
-            <p className="italic text-slate-300">
-              <span className="font-bold">Remember:</span> Focus entirely on the <span className="font-semibold">impact</span>, not your intent. Avoid explaining "good intentions" as this rarely repairs damage. Immediately move toward the promise for the future.
-            </p>
-          </div>
-        </>
-      )
-    },
-    {
-      title: "The Openly Mended Paradigm",
-      icon: "✨",
-      color: "from-purple-500 to-pink-600",
-      content: (
-        <>
-          <p className="text-lg leading-relaxed mb-6">
-            True resolution does not mean the absence of scars; it means <span className="font-bold">wholeness is found in the transparency</span> with which those scars are carried. By engaging <span className="font-bold">"eye-to-eye and heart-to-heart"</span> regarding shared brokenness, you dismantle the hierarchies that prevent authentic connection.
-          </p>
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-10">
-            <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-purple-300 mb-4 flex items-center">
-                <span className="mr-2">💎</span> Your Scars as Bridges
-              </h3>
-              <p className="text-slate-300 mb-4">
-                Instead of hiding your history, view your recovery process as a <span className="font-semibold">"fund of knowledge"</span> that provides you with unique authority to lead others. Your scars become bridges for authentic connection with those still in the "battlefield".
-              </p>
-              <div>
-                <label className="block text-slate-400 mb-2">What past struggle has become your greatest bridge to others?</label>
-                <input
-                  type="text"
-                  value={fundOfKnowledge}
-                  onChange={(e) => setFundOfKnowledge(e.target.value)}
-                  placeholder="e.g., 'My journey through addiction gives me empathy for others'"
-                  className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-            
-            <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-pink-300 mb-4 flex items-center">
-                <span className="mr-2">🛡️</span> Deconstruct Strongholds
-              </h3>
-              <p className="text-slate-300 mb-4">
-                Practice meta-cognition by <span className="font-semibold">"thinking about what you are thinking about"</span> to identify "culprit" thoughts that label you as permanently flawed. Firmly reject the lie that your past determines your future.
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center mr-3">
-                    <span>❌</span>
-                  </div>
-                  <span className="text-slate-400">"I am damaged goods"</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center mr-3">
-                    <span>✅</span>
-                  </div>
-                  <span className="text-slate-300">"I am fearfully and wonderfully made"</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center mr-3">
-                    <span>✅</span>
-                  </div>
-                  <span className="text-slate-300">"My past does not define my future"</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-purple-300 mb-4 flex items-center">
-              <span className="mr-2">🗣️</span> Verbalize Your Winning Story
-            </h3>
-            <p className="text-slate-300 mb-4">
-              Gird your mind by proclaiming foundational truths about your identity as a <span className="font-semibold">"victor"</span>. This proclamation acts as a call to action for your mission.
-            </p>
-            <textarea
-              value={missionProclamation}
-              onChange={(e) => setMissionProclamation(e.target.value)}
-              placeholder="My winning story: I am not defined by my past struggles, but empowered by my recovery to build institutions that heal others..."
-              className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 min-h-[120px] text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            />
-          </div>
-        </>
-      )
-    },
-    {
-      title: "Your Mission Architecture",
-      icon: "🚀",
-      color: "from-emerald-500 to-teal-600",
-      content: (
-        <>
-          <p className="text-lg leading-relaxed mb-6">
-            Your unique journey provides the architectural blueprint for building institutions that address the <span className="font-bold">"uncommunicated messages"</span> that lead to broken relationships. This shifts your goal from acquiring tangible corporate achievements to becoming someone truly valuable who empowers others to shine.
-          </p>
-          
-          <div className="space-y-8">
-            <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-emerald-300 mb-4 flex items-center">
-                <span className="mr-2">🧠</span> AI as Your Vocabulary of Hope
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  {
-                    title: "Meta-Cognitive Monitoring",
-                    desc: "AI prompts users to 'think about what they are thinking about,' identifying 'culprit' thoughts like 'I am damaged goods'"
-                  },
-                  {
-                    title: "Narrative Reframing",
-                    desc: "AI helps reframe history of relapse into a 'testimony of recovery' where users are 'openly mended'"
-                  },
-                  {
-                    title: "Positive Scripting",
-                    desc: "AI provides a 'litmus test' to distinguish lies from truth, replacing negative patterns with foundational proclamations"
-                  },
-                  {
-                    title: "Victory Scripts",
-                    desc: "AI generates personalized scripts that gird the mind for action: 'I'm not going there!'"
-                  }
-                ].map((item, index) => (
-                  <div key={index} className="bg-slate-800/40 border border-slate-700/50 rounded-lg p-4">
-                    <h4 className="font-bold text-emerald-300 mb-2">{item.title}</h4>
-                    <p className="text-slate-300">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-teal-300 mb-4 flex items-center">
-                <span className="mr-2">📜</span> Draft Your Mission Proclamation
-              </h3>
-              <p className="text-slate-300 mb-4">
-                Craft a powerful statement that incorporates your history as a source of strength for your AI recovery institution:
-              </p>
-              <textarea
-                value={missionProclamation}
-                onChange={(e) => setMissionProclamation(e.target.value)}
-                placeholder="Mission Proclamation: Through my journey of recovery, I architect AI-driven institutions that transform broken records into winning stories. My scars are not liabilities—they are the blueprint for healing others. I build not from a place of perfection, but from the powerful position of being openly mended."
-                className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 min-h-[150px] text-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-              />
-            </div>
-            
-            <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 border border-emerald-800/50 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-emerald-300 mb-3">Why This Matters</h3>
-              <p className="text-slate-300">
-                By leveraging your analytical engineering background and AI focus, you create digital environments where vulnerability becomes a bridge for shared wholeness. Your mission transforms uncommunicated messages of brokenness into technical architectures for human empowerment.
-              </p>
-            </div>
-          </div>
-        </>
-      )
-    }
-  ];
-
   const handleComplete = () => {
     setShowCelebration(true);
     setTimeout(() => setShowCelebration(false), 6000);
     
-    // Track completion
     trackEvent('battlefield_completed', {
       sections_completed: 4,
       has_culprit_thought: !!culpritThought,
@@ -337,51 +60,238 @@ export default function BattlefieldPage() {
     });
   };
 
-  const celebrationVariants = {
-    initial: { scale: 0, opacity: 0 },
-    animate: { 
-      scale: 1, 
-      opacity: 1,
-      transition: { type: "spring", damping: 5, stiffness: 100 }
-    },
-    exit: { 
-      scale: 0, 
-      opacity: 0,
-      transition: { duration: 0.5 }
-    }
-  };
+  const sections = [
+    {
+      title: "The Battlefield of the Mind",
+      icon: "🧠",
+      gradient: "from-purple-500 via-pink-500 to-red-500",
+      content: (
+        <div className="space-y-8">
+          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
+            <p className="text-xl leading-relaxed">
+              Personal conflict is primarily fought in the <span className="font-bold text-purple-600 dark:text-purple-400">"battlefield of the mind,"</span> where entrenched patterns of thinking, or <span className="font-bold text-purple-600 dark:text-purple-400">"strongholds,"</span> lead to suspicion, doubt, and fear.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-purple-200 dark:border-purple-800">
+              <h3 className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4 flex items-center">
+                <span className="mr-3 text-3xl">🔍</span> Identify Your Culprit Thought
+              </h3>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                What limiting belief is occupying your mind?
+              </label>
+              <input
+                type="text"
+                value={culpritThought}
+                onChange={(e) => setCulpritThought(e.target.value)}
+                placeholder="e.g., 'I'm not good enough', 'My past defines me'"
+                className="w-full bg-gray-50 dark:bg-gray-900 border-2 border-purple-300 dark:border-purple-700 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+              />
+            </div>
 
-  const confettiVariants = {
-    initial: { y: "-100%", opacity: 1 },
-    animate: {
-      y: "100%",
-      opacity: [1, 0.7, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        repeatType: "loop" as const,
-        ease: "linear"
-      }
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 shadow-xl border-2 border-purple-300 dark:border-purple-700">
+              <h3 className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4 flex items-center">
+                <span className="mr-3 text-3xl">✨</span> Reframe with Truth
+              </h3>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                Replace the lie with an empowering truth:
+              </label>
+              <input
+                type="text"
+                value={reframedThought}
+                onChange={(e) => setReframedThought(e.target.value)}
+                placeholder="e.g., 'I am fearfully and wonderfully made'"
+                className="w-full bg-white dark:bg-gray-800 border-2 border-purple-300 dark:border-purple-700 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+              />
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "The Cleanup Process",
+      icon: "🧼",
+      gradient: "from-blue-500 via-cyan-500 to-teal-500",
+      content: (
+        <div className="space-y-6">
+          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 mb-8">
+            <p className="text-xl">
+              Repair relationships with this powerful 4-step framework. Move from a <span className="font-bold text-blue-600 dark:text-blue-400">"broken record"</span> to a <span className="font-bold text-blue-600 dark:text-blue-400">"winning story"</span> of shared recovery.
+            </p>
+          </div>
+          
+          {[{
+            step: 1,
+            title: "Apologize",
+            placeholder: "I sincerely apologize for...",
+            key: "apologize",
+            icon: "💙"
+          }, {
+            step: 2,
+            title: "Own the Impact",
+            placeholder: "I take 100% accountability for...",
+            key: "impact",
+            icon: "🎯"
+          }, {
+            step: 3,
+            title: "Make a Promise",
+            placeholder: "In the future, I will...",
+            key: "promise",
+            icon: "🤝"
+          }, {
+            step: 4,
+            title: "Recommit",
+            placeholder: "Our relationship matters because...",
+            key: "recommit",
+            icon: "💖"
+          }].map((item) => (
+            <div key={item.step} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border-l-4 border-blue-500">
+              <div className="flex items-center mb-4">
+                <span className="text-3xl mr-3">{item.icon}</span>
+                <div>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm font-bold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+                      Step {item.step}
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.title}</h3>
+                  </div>
+                </div>
+              </div>
+              <textarea
+                value={cleanupStep[item.key as keyof typeof cleanupStep]}
+                onChange={(e) => setCleanupStep(prev => ({...prev, [item.key]: e.target.value}))}
+                placeholder={item.placeholder}
+                className="w-full bg-gray-50 dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 min-h-[120px] text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              />
+            </div>
+          ))}
+        </div>
+      )
+    },
+    {
+      title: "Openly Mended Paradigm",
+      icon: "✨",
+      gradient: "from-pink-500 via-purple-500 to-indigo-500",
+      content: (
+        <div className="space-y-8">
+          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
+            <p className="text-xl">
+              True healing means <span className="font-bold text-pink-600 dark:text-pink-400">wholeness found in transparency</span>. Your scars become bridges that connect you authentically with others.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-2xl p-8 shadow-xl border-2 border-pink-300 dark:border-pink-700">
+            <h3 className="text-2xl font-bold text-pink-600 dark:text-pink-400 mb-4 flex items-center">
+              <span className="mr-3 text-3xl">💎</span> Your Fund of Knowledge
+            </h3>
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">
+              What past struggle has become your bridge to help others?
+            </label>
+            <input
+              type="text"
+              value={fundOfKnowledge}
+              onChange={(e) => setFundOfKnowledge(e.target.value)}
+              placeholder="e.g., 'My journey through loss taught me compassion'"
+              className="w-full bg-white dark:bg-gray-800 border-2 border-pink-300 dark:border-pink-700 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all"
+            />
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-purple-200 dark:border-purple-800">
+            <h3 className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4 flex items-center">
+              <span className="mr-3 text-3xl">🗣️</span> Your Winning Story
+            </h3>
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">
+              Proclaim your identity as a victor:
+            </label>
+            <textarea
+              value={missionProclamation}
+              onChange={(e) => setMissionProclamation(e.target.value)}
+              placeholder="My winning story: I am not defined by my past, but empowered by my recovery..."
+              className="w-full bg-gray-50 dark:bg-gray-900 border-2 border-purple-300 dark:border-purple-700 rounded-xl px-4 py-3 min-h-[150px] text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all resize-none"
+            />
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Mission Architecture",
+      icon: "🚀",
+      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+      content: (
+        <div className="space-y-8">
+          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
+            <p className="text-xl">
+              Your journey provides the blueprint for <span className="font-bold text-emerald-600 dark:text-emerald-400">building institutions that heal</span>. Channel your transformation into a mission that empowers others.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { title: "Meta-Cognitive AI", desc: "Help others identify limiting thoughts", icon: "🧠" },
+              { title: "Narrative Reframing", desc: "Transform stories from victim to victor", icon: "📖" },
+              { title: "Positive Scripting", desc: "Generate empowering self-talk", icon: "✍️" },
+              { title: "Victory Architecture", desc: "Build systems for sustained growth", icon: "🏗️" }
+            ].map((item, i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all border border-emerald-200 dark:border-emerald-800 hover:scale-105">
+                <span className="text-4xl mb-3 block">{item.icon}</span>
+                <h4 className="font-bold text-lg text-emerald-600 dark:text-emerald-400 mb-2">{item.title}</h4>
+                <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 shadow-xl border-2 border-emerald-300 dark:border-emerald-700">
+            <h3 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4 flex items-center">
+              <span className="mr-3 text-3xl">📜</span> Draft Your Mission
+            </h3>
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">
+              How will you use your transformation to build institutions that heal?
+            </label>
+            <textarea
+              value={missionProclamation}
+              onChange={(e) => setMissionProclamation(e.target.value)}
+              placeholder="Mission: Through my recovery, I architect AI-driven systems that transform broken records into winning stories..."
+              className="w-full bg-white dark:bg-gray-800 border-2 border-emerald-300 dark:border-emerald-700 rounded-xl px-4 py-3 min-h-[180px] text-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all resize-none"
+            />
+          </div>
+        </div>
+      )
     }
-  };
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-slate-50 font-sans selection:bg-amber-500/20">
-      {/* Decorative elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-16 -right-16 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/4 left-1/3 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-56 h-56 bg-emerald-500/10 rounded-full blur-2xl"></div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-pink-900/20">
+      <Navigation />
       
-      <div className="relative max-w-5xl mx-auto px-6 py-12 md:py-16">
-        {/* Progress Navigation */}
-        <div className="flex justify-between mb-12">
+      <div className="pt-24 pb-16 px-4 max-w-6xl mx-auto">
+        {/* Progress Bar */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Battlefield of the Mind
+            </h1>
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              Section {currentSection + 1} of {sections.length}
+            </span>
+          </div>
+          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
+            <motion.div
+              className={`h-full bg-gradient-to-r ${sections[currentSection].gradient}`}
+              initial={{ width: 0 }}
+              animate={{ width: `${((currentSection + 1) / sections.length) * 100}%` }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+        </div>
+
+        {/* Section Navigation Pills */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
           {sections.map((section, index) => (
             <motion.button
               key={index}
-              whileHover={{ y: -5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setCurrentSection(index);
                 trackEvent('section_navigation', { 
@@ -390,22 +300,26 @@ export default function BattlefieldPage() {
                   section_name: section.title 
                 });
               }}
-              className={`flex flex-col items-center p-3 rounded-xl transition-all ${
-                currentSection === index 
-                  ? `bg-gradient-to-br ${section.color} text-slate-900 shadow-lg`
-                  : 'bg-slate-800/50 hover:bg-slate-800'
+              className={`relative p-4 rounded-2xl transition-all ${
+                currentSection === index
+                  ? `bg-gradient-to-br ${section.gradient} text-white shadow-xl`
+                  : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
               }`}
             >
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                currentSection === index ? 'bg-white' : 'bg-slate-700'
+              <div className="text-3xl mb-2">{section.icon}</div>
+              <div className={`text-sm font-bold ${
+                currentSection === index ? 'text-white' : 'text-gray-700 dark:text-gray-300'
               }`}>
-                <span className={`text-xl ${currentSection === index ? 'text-slate-900' : 'text-slate-300'}`}>
-                  {section.icon}
-                </span>
-              </div>
-              <span className="text-sm font-medium text-center max-w-[120px]">
                 {section.title}
-              </span>
+              </div>
+              {currentSection === index && (
+                <motion.div
+                  layoutId="activeSection"
+                  className="absolute inset-0 bg-white/20 rounded-2xl"
+                  initial={false}
+                  transition={{ type: "spring", duration: 0.5 }}
+                />
+              )}
             </motion.button>
           ))}
         </div>
@@ -418,37 +332,39 @@ export default function BattlefieldPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
-            className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 md:p-10 shadow-2xl mb-12"
+            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200/50 dark:border-gray-700/50 mb-12"
           >
-            <div className="flex items-start mb-8">
-              <div className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${sections[currentSection].color} flex items-center justify-center mr-6`}>
-                <span className="text-3xl">{sections[currentSection].icon}</span>
+            <div className="flex items-center mb-8">
+              <div className={`flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br ${sections[currentSection].gradient} flex items-center justify-center text-4xl shadow-lg`}>
+                {sections[currentSection].icon}
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-500">
-                {sections[currentSection].title}
-              </h1>
+              <div className="ml-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                  {sections[currentSection].title}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">Step {currentSection + 1} of {sections.length}</p>
+              </div>
             </div>
             
-            <div className="prose prose-slate max-w-none">
-              {sections[currentSection].content}
-            </div>
+            {sections[currentSection].content}
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation Controls */}
-        <div className="flex justify-between items-center mb-20">
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center gap-4">
           <motion.button
-            whileHover={{ x: -5 }}
+            whileHover={{ scale: 1.05, x: -5 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentSection > 0 && setCurrentSection(prev => prev - 1)}
             disabled={currentSection === 0}
-            className={`px-6 py-3 rounded-xl font-medium text-lg transition-all ${
+            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all ${
               currentSection === 0
-                ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                : 'bg-slate-800/70 hover:bg-slate-700 text-slate-300'
+                ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
+                : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl'
             }`}
           >
-            ← Previous
+            <ArrowLeft className="w-5 h-5" />
+            <span>Previous</span>
           </motion.button>
           
           {currentSection < sections.length - 1 ? (
@@ -456,138 +372,75 @@ export default function BattlefieldPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setCurrentSection(prev => prev + 1)}
-              className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-900 font-bold text-lg rounded-xl shadow-lg shadow-amber-500/30 transition-all"
+              className={`flex items-center space-x-2 px-8 py-4 bg-gradient-to-r ${sections[currentSection].gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all`}
             >
-              Next Section →
+              <span>Next Section</span>
+              <ArrowRight className="w-5 h-5" />
             </motion.button>
           ) : (
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleComplete}
-              className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-slate-900 font-bold text-lg rounded-xl shadow-lg shadow-emerald-500/30 transition-all"
+              className="flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
-              I&apos;VE RECALIBRATED →
+              <Check className="w-5 h-5" />
+              <span>Complete Journey</span>
             </motion.button>
           )}
         </div>
-
-        {/* Final Call to Action */}
-        {currentSection === sections.length - 1 && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-center max-w-3xl mx-auto p-8 bg-slate-900/50 border border-slate-800 rounded-2xl mb-16"
-          >
-            <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-rose-400">
-              Your Transformation Is Complete
-            </h2>
-            <p className="text-xl text-slate-300 mb-8">
-              You&apos;ve moved from a <span className="font-bold">"broken record"</span> of conflict to a <span className="font-bold">"winning story"</span> of shared recovery. Your scars are now bridges. Your past is now power.
-            </p>
-            <p className="text-lg text-slate-400 italic max-w-2xl mx-auto">
-              "Know that you are created to be more than enough. Special when you are born." 
-              <br />
-              <span className="text-slate-500">— This isn&apos;t just a text—it&apos;s your new foundation.</span>
-            </p>
-          </motion.div>
-        )}
       </div>
 
-      {/* Celebration Overlay */}
+      {/* Celebration Modal */}
       <AnimatePresence>
         {showCelebration && (
           <motion.div 
-            variants={celebrationVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="fixed inset-0 bg-gradient-to-br from-slate-900/95 to-slate-950/95 z-50 flex flex-col items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           >
-            {/* Confetti */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {[...Array(50)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  variants={confettiVariants}
-                  initial="initial"
-                  animate="animate"
-                  style={{
-                    position: "absolute",
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    width: `${Math.random() * 10 + 5}px`,
-                    height: `${Math.random() * 10 + 5}px`,
-                    backgroundColor: ["#f59e0b", "#3b82f6", "#8b5cf6", "#ec4899", "#10b981", "#0ea5e9"][
-                      Math.floor(Math.random() * 6)
-                    ],
-                    borderRadius: Math.random() > 0.5 ? "50%" : "0",
-                    transform: `rotate(${Math.random() * 360}deg)`,
-                    opacity: Math.random() * 0.7 + 0.3
-                  }}
-                />
-              ))}
-            </div>
-            
-            <div className="text-center relative z-10 max-w-2xl mx-auto px-4">
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              exit={{ scale: 0, rotate: 180 }}
+              transition={{ type: "spring", duration: 0.8 }}
+              className="bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-3xl p-12 max-w-2xl text-center shadow-2xl"
+            >
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", damping: 5, stiffness: 100, delay: 0.3 }}
-                className="w-40 h-40 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center mx-auto mb-8 shadow-xl shadow-amber-500/50 border-4 border-slate-900"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 10, -10, 0]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+                className="text-8xl mb-6"
               >
-                <span className="text-7xl">✨</span>
+                ✨
               </motion.div>
               
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-emerald-400"
-              >
+              <h2 className="text-5xl font-bold text-white mb-4">
                 YOU ARE RECALIBRATED!
-              </motion.h2>
+              </h2>
               
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                className="text-2xl text-slate-300 mb-10 max-w-2xl mx-auto"
-              >
+              <p className="text-2xl text-white/90 mb-8">
                 Your winning story has begun. Your scars are now bridges. Your mission is clear.
-              </motion.p>
+              </p>
               
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9 }}
-                className="flex justify-center"
-              >
-                <div className="w-32 h-1.5 bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: "100%" }}
-                    animate={{ width: 0 }}
-                    transition={{ duration: 5, ease: "linear" }}
-                    className="h-full bg-white"
-                  />
-                </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-                className="mt-12 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl max-w-2xl mx-auto"
-              >
-                <p className="text-xl font-bold mb-4">
-                  "I am not defined by my past struggles, but empowered by my recovery to build institutions that heal others."
-                </p>
-                <p className="text-lg text-slate-400 italic">
-                  — Your Mission Proclamation
-                </p>
-              </motion.div>
-            </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="flex items-center justify-center space-x-2 px-6 py-3 bg-white text-purple-600 font-bold rounded-xl hover:bg-gray-100 transition-all">
+                  <Download className="w-5 h-5" />
+                  <span>Export Progress</span>
+                </button>
+                <button className="flex items-center justify-center space-x-2 px-6 py-3 bg-white/20 text-white font-bold rounded-xl hover:bg-white/30 transition-all border-2 border-white/30">
+                  <Share2 className="w-5 h-5" />
+                  <span>Share Journey</span>
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

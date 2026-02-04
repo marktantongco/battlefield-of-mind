@@ -231,6 +231,20 @@ toolPermissions:
       permission: allow
     - command: npm(\s.*)?
       permission: allow
+    - command: ssh(\s.*)?
+      permission: allow
+    - command: vercel(\s.*)?
+      permission: allow
+    - command: "cat << 'EOF'\n\u26A0\uFE0F  DEPLOYMENT ERROR DETECTED\nLet me check\
+        \ the error logs to see what went wrong...\nEOF"
+      permission: allow
+    - command: "cat > .vercelrc << 'EOF'\n{\n  \"buildCommand\": \"npm run build\"\
+        ,\n  \"framework\": \"nextjs\"\n}\nEOF"
+      permission: allow
+    - command: pkill(\s.*)?
+      permission: allow
+    - command: const [reframedThought, setReframedThought] = useState("")
+      permission: allow
     # Run bash commands in a sandboxed environment - currently available for
     # MacOS and Linux only. Enabling this option for Windows will prevent the
     # agent from running powershell commands.

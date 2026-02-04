@@ -7,8 +7,14 @@ import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Blog Platform',
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'AI-powered blog for Philippine creators',
+  title: 'MindScape AI - Transform & Create',
+  description: 'Where mental transformation meets AI-powered creativity. A synergized platform for personal growth and content innovation.',
+  keywords: ['mental health', 'personal growth', 'AI tools', 'content creation', 'battlefield of mind', 'transformation'],
+  openGraph: {
+    title: 'MindScape AI - Transform Your Mind, Create with AI',
+    description: 'Where mental transformation meets AI-powered creativity',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
@@ -17,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.className} antialiased`}>
         <Analytics />
         {children}
         <VercelAnalytics />
