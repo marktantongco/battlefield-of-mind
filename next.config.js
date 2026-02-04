@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // For Vercel, don't use export mode - use default
-  output: process.env.DEPLOYMENT_TARGET === 'docker' ? 'standalone' : undefined,
+  // No output mode for Vercel - use default server mode
   images: {
     unoptimized: true,
     remotePatterns: [
