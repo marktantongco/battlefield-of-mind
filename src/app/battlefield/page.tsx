@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { saveProgress, loadProgress } from "@/lib/storage";
+import { trackEvent } from "@/components/Analytics";
 
 export default function BattlefieldPage() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -16,6 +18,34 @@ export default function BattlefieldPage() {
   });
   const [missionProclamation, setMissionProclamation] = useState("");
   const [fundOfKnowledge, setFundOfKnowledge] = useState("");
+
+  // Load saved progress on mount
+  useEffect(() => {
+    const saved = loadProgress();
+    if (saved.currentSection !== undefined) setCurrentSection(saved.currentSection);
+    if (saved.culpritThought) setCulpritThought(saved.culpritThought);
+    if (saved.reframedThought) setReframedThought(saved.reframedThought);
+    if (saved.cleanupStep) setCleanupStep(saved.cleanupStep);
+    if (saved.missionProclamation) setMissionProclamation(saved.missionProclamation);
+    if (saved.fundOfKnowledge) setFundOfKnowledge(saved.fundOfKnowledge);
+    
+    // Track page view
+    trackEvent('battlefield_visit', { section: 'initial' });
+  }, []);
+
+  // Auto-save progress
+  useEffect(() => {
+    const progress = {
+      currentSection,
+      culpritThought,
+      reframedThought,
+      cleanupStep,
+      missionProclamation,
+      fundOfKnowledge,
+      completedSections: [],
+    };
+    saveProgress(progress);
+  }, [currentSection, culpritThought, reframedThought, cleanupStep, missionProclamation, fundOfKnowledge]);
 
   const sections = [
     {
@@ -297,6 +327,14 @@ export default function BattlefieldPage() {
   const handleComplete = () => {
     setShowCelebration(true);
     setTimeout(() => setShowCelebration(false), 6000);
+    
+    // Track completion
+    trackEvent('battlefield_completed', {
+      sections_completed: 4,
+      has_culprit_thought: !!culpritThought,
+      has_reframed_thought: !!reframedThought,
+      has_mission_proclamation: !!missionProclamation,
+    });
   };
 
   const celebrationVariants = {
@@ -344,7 +382,14 @@ export default function BattlefieldPage() {
             <motion.button
               key={index}
               whileHover={{ y: -5 }}
-              onClick={() => setCurrentSection(index)}
+              onClick={() => {
+                setCurrentSection(index);
+                trackEvent('section_navigation', { 
+                  from_section: currentSection, 
+                  to_section: index,
+                  section_name: section.title 
+                });
+              }}
               className={`flex flex-col items-center p-3 rounded-xl transition-all ${
                 currentSection === index 
                   ? `bg-gradient-to-br ${section.color} text-slate-900 shadow-lg`

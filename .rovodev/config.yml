@@ -229,6 +229,8 @@ toolPermissions:
     - command: "then\n    echo \"   \u2705 SSH public key found at ~/.ssh/id_ed25519.pub\"\
         \n    echo \"   Key fingerprint:\"\n    ssh-keygen -lf ~/.ssh/id_ed25519.pub"
       permission: allow
+    - command: npm(\s.*)?
+      permission: allow
     # Run bash commands in a sandboxed environment - currently available for
     # MacOS and Linux only. Enabling this option for Windows will prevent the
     # agent from running powershell commands.

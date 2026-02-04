@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { DefaultSeo } from 'next-seo'
 import { SEO_CONFIG } from '@/lib/seo-config'
+import { Analytics } from '@/components/Analytics'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Analytics />
+      </head>
       <body className={inter.className}>
         <DefaultSeo {...SEO_CONFIG} />
         {children}
+        <VercelAnalytics />
       </body>
     </html>
   )
