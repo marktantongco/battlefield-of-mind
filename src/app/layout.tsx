@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
-import { DefaultSeo } from 'next-seo'
-import { SEO_CONFIG } from '@/lib/seo-config'
 import { Analytics } from '@/components/Analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 
@@ -22,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Analytics />
-        <DefaultSeo {...SEO_CONFIG} />
         {children}
         <VercelAnalytics />
       </body>
