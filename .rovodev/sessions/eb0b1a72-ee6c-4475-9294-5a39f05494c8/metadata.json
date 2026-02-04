@@ -1,0 +1,74 @@
+{
+    "bookmarks": [
+        {
+            "created_at": 1768463373,
+            "message_index": 7,
+            "name": "gh auth login                                                        \u2502\n\u2502     # Then list repos                                                    \u2502\n\u2502     gh repo list --limit 100 | grep reclaim",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768463519,
+            "message_index": 15,
+            "name": "yolo",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768463671,
+            "message_index": 21,
+            "name": "cf-reclaim",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768621002,
+            "message_index": 23,
+            "name": "rename content://media/external/images/media/1000081511 to change-words-change-world-remarkable-encounters-battlefield-mind-poster.jpg snd alt-text with Change your words, change your world\" with reMarkable encounters, elevate together through self-care, love, amplify light, silence noise, inner ...",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768621162,
+            "message_index": 47,
+            "name": "https://cdn.discordapp.com/attachments/1460008993006031020/1461073681601134615/1768401119017.jpg?ex=696bdd67&is=696a8be7&hm=fb33591858dc6c5785446241aaaf2d60849b2e4dc3718d5adac418372b77f32c&",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768621227,
+            "message_index": 51,
+            "name": "uploqd to github",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768621323,
+            "message_index": 65,
+            "name": "create a new personal seo",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768625499,
+            "message_index": 81,
+            "name": "compress both images to less than 200kb https://cdn.discordapp.com/attachments/1460008993006031020/1461943950230290670/1768624747711-019bca3f-8def-76b6-857e-4a03a5db361d.png?ex=696c64e7&is=696b1367&hm=96d34c4b94474d28c992c18f2367d202cdf3c14c4a162487a882de5bd70eafde& and https://cdn.discordapp.com...",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768625925,
+            "message_index": 101,
+            "name": "new compress images as less than 150kb then renane them to more descriptive, renamr the first image into ghibli-change-words-world-motivational-poster.jpg Alt Text: Studio Ghibli style motivational poster: Change your words change your world, remarkable encounters, elevate together, win battlefie...",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768625962,
+            "message_index": 107,
+            "name": "1",
+            "type": "prompt"
+        },
+        {
+            "created_at": 1768626032,
+            "message_index": 117,
+            "name": "--yolo",
+            "type": "prompt"
+        }
+    ],
+    "fork_data": null,
+    "is_manual_title": false,
+    "title": "GitHub Reclaim Projects Check",
+    "workspace_path": "/root"
+}

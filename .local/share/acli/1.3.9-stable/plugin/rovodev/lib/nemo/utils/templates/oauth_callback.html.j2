@@ -1,0 +1,28 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+<div class="container">
+    {# Logo #}
+    <img src="{{ icon_url | default(rovodev_logo) }}" alt="{{ alt_text | default('RovoDev') }}" class="logo" />
+    
+    {# Status Message #}
+    <div class="status-message">
+        <span class="status-icon {{ 'success' if is_success else 'error' }}">
+            {{ '✓' if is_success else '✕' }}
+        </span>
+        <div class="message">{{ status_title }}</div>
+    </div>
+    
+    {# Detail Info Box #}
+    {% if detail_info %}
+    <div class="{% if monospace %}info-box-mono{% else %}info-box{% endif %}{% if is_error %} error{% endif %}{% if centered %} centered{% endif %}">
+        {{ detail_info }}
+    </div>
+    {% endif %}
+    
+    {# Close Instruction #}
+    <div class="close-instruction">
+        You can safely close this tab now.
+    </div>
+</div>
+{% endblock %}

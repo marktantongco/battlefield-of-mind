@@ -1,0 +1,62 @@
+[
+    {
+        "active_form": "Initializing Next.js project with TypeScript and Tailwind CSS",
+        "content": "Initialize Next.js project with TypeScript and Tailwind CSS",
+        "id": 1,
+        "status": "completed"
+    },
+    {
+        "active_form": "Configuring GitHub Pages deployment with GitHub Actions",
+        "content": "Configure GitHub Pages deployment with GitHub Actions",
+        "id": 2,
+        "status": "completed"
+    },
+    {
+        "active_form": "Setting up WordPress REST API integration for headless CMS",
+        "content": "Set up WordPress REST API integration for headless CMS",
+        "id": 3,
+        "status": "completed"
+    },
+    {
+        "active_form": "Implementing AI writing assistant components",
+        "content": "Implement AI writing assistant components (content generator, auto-tagging, SEO optimizer)",
+        "id": 4,
+        "status": "completed"
+    },
+    {
+        "active_form": "Creating monetization layer",
+        "content": "Create monetization layer (donations, affiliate links, sponsored posts)",
+        "id": 5,
+        "status": "completed"
+    },
+    {
+        "active_form": "Building SEO optimization system",
+        "content": "Build SEO optimization system (meta tags, JSON-LD, sitemap, robots.txt)",
+        "id": 6,
+        "status": "completed"
+    },
+    {
+        "active_form": "Creating reusable UI components with ShadCN UI",
+        "content": "Create reusable UI components with ShadCN UI",
+        "id": 7,
+        "status": "completed"
+    },
+    {
+        "active_form": "Implementing performance optimizations",
+        "content": "Implement performance optimizations (lazy loading, Core Web Vitals)",
+        "id": 8,
+        "status": "completed"
+    },
+    {
+        "active_form": "Adding Filipino/English language support and translation features",
+        "content": "Add Filipino/English language support and translation features",
+        "id": 9,
+        "status": "completed"
+    },
+    {
+        "active_form": "Testing deployment and creating documentation",
+        "content": "Test deployment and create documentation",
+        "id": 10,
+        "status": "completed"
+    }
+]

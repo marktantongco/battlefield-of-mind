@@ -1,0 +1,50 @@
+[
+    {
+        "active_form": null,
+        "content": "Compress & rename img1 to ghibli-change-words-world (195KB \u2192 <150KB)",
+        "id": 1,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Compress & rename img2 (195KB \u2192 <150KB)",
+        "id": 2,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Compress & rename img3 (158KB \u2192 <150KB)",
+        "id": 3,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Rename img4 (148KB \u2713)",
+        "id": 4,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Compress & rename img5 (158KB \u2192 <150KB)",
+        "id": 5,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Rename img6 (148KB \u2713)",
+        "id": 6,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Rename img7 (33KB \u2713)",
+        "id": 7,
+        "status": "completed"
+    },
+    {
+        "active_form": null,
+        "content": "Rename img8 (92KB \u2713)",
+        "id": 8,
+        "status": "completed"
+    }
+]

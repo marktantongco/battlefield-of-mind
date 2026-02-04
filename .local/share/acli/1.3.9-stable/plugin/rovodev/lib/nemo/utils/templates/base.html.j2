@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        {% include 'styles/base.css' %}
+        {% include 'styles/status_message.css' %}
+        {% include 'styles/info_box.css' %}
+        {% include 'styles/helper_text.css' %}
+        {% include 'styles/buttons.css' %}
+    </style>
+    {% if csp_policy %}
+    <meta http-equiv="Content-Security-Policy" content="{{ csp_policy }}" />
+    {% endif %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>

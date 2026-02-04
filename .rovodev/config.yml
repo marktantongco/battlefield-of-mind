@@ -1,0 +1,268 @@
+version: 1
+
+# Agent behavior and model settings
+agent:
+  # Additional system prompt to append to the agent's default system prompt
+  additionalSystemPrompt: null
+  # Enable streaming responses from the AI model
+  streaming: true
+  # Temperature setting for AI model responses (0.0-1.0)
+  temperature: 0.3
+  # Model ID to use for the agent. See /models command to list available models.
+  modelId: auto
+  # Enable the deep planning tool for complex task planning
+  enableDeepPlanTool: false
+  # Enable/disable experimental features
+  experimental:
+    # Enable/disable the agent to run in shadow mode. This will run the agent on
+    # a temporary clone of your workspace, prompting you before any changes are
+    # applied to your working directory.
+    enableShadowMode: false
+
+# Session management settings
+sessions:
+  # Directory where session data is stored
+  persistenceDir: /root/.rovodev/sessions
+  # (Experimental) When enabled, Rovo Dev may warn and offer to switch your
+  # workspace git state (branch/commit) to match the session checkpoint when
+  # restoring or switching sessions.
+  enableWorkspaceStateSync: false
+
+# Atlassian product integration settings
+atlassianConnections:
+  # Global jira projects user is part of
+  jiraProjects: []
+  # Directory where any local overrides are stored
+  localOverridePath: .rovodev/atlassian_connections.json
+  # Whether atlassian integration is enabled
+  enabled: true
+
+# Console and UI behavior settings
+console:
+  # Output format for console display (markdown, simple, or raw)
+  outputFormat: markdown
+  # Show tool execution results in the console
+  showToolResults: true
+  # Per-tool configuration for whether to show tool execution results in the
+  # console
+  toolResultVisibility:
+    bash: true
+    powershell: true
+    open_files: true
+    create_file: true
+    delete_file: true
+    move_file: true
+    expand_code_chunks: true
+    find_and_replace_code: true
+    grep: true
+    expand_folder: true
+    update_allowed_external_paths: true
+  # Editing mode for the prompt session
+  editingMode: EMACS
+  # Shell command to generate a command prompt that replaces the default '> '.
+  # For example, set 'STARSHIP_SHELL=rovodev starship prompt' to use Starship.
+  customCommandPrompt: null
+  # Color theme for syntax highlighting. Options: 'dark' (Dracula), 'light',
+  # 'auto' (detect system theme), or any [Pygments theme
+  # name](https://pygments.org/styles/)(e.g., 'monokai', 'solarized-light')
+  theme: dark
+  # Maximum width of the console output in characters, or 'fill' to fill the
+  # terminal width
+  maxOutputWidth: 120
+  # Enable or disable animated startup loading screen
+  enableStartupAnimations: true
+
+# Logging and prompt collection settings
+logging:
+  # Path to the log file
+  path: /root/.rovodev/rovodev.log
+
+# Model Context Protocol server configuration
+mcp:
+  # Path to the MCP (Model Context Protocol) configuration file
+  mcpConfigPath: /root/.rovodev/mcp.json
+  # List of allowed MCP server signatures
+  allowedMcpServers: []
+  # List of globally disabled MCP server signatures
+  disabledMcpServers: []
+
+# Tool and command permission settings
+toolPermissions:
+  # Default permission for tools not explicitly listed
+  default: ask
+  # Permission settings for specific tools
+  tools:
+    create_file: allow
+    delete_file: allow
+    move_file: ask
+    find_and_replace_code: allow
+    open_files: allow
+    expand_code_chunks: allow
+    expand_folder: allow
+    grep: allow
+  bash:
+    # Default permission for bash commands not explicitly listed
+    default: ask
+    # List of specific bash commands with their permission settings
+    commands:
+    - command: ls(\s.*)?
+      permission: allow
+    - command: cat(\s.*)?
+      permission: allow
+    - command: echo(\s.*)?
+      permission: allow
+    - command: pwd
+      permission: allow
+    - command: git(\s.*)?
+      permission: allow
+    - command: gh(\s.*)?
+      permission: allow
+    - command: curl(\s.*)?
+      permission: allow
+    - command: convert(\s.*)?
+      permission: allow
+    - command: magick(\s.*)?
+      permission: allow
+    - command: cp(\s.*)?
+      permission: allow
+    - command: GIT_TRACE=1(\s.*)?
+      permission: allow
+    - command: awk(\s.*)?
+      permission: allow
+    - command: for i in {1..8}
+      permission: allow
+    - command: done
+      permission: allow
+    - command: find(\s.*)?
+      permission: allow
+    - command: "then\n    echo \"\u2705 WebP image found\"\nelse\n    echo \"\u274C\
+        \ WebP image missing\"\nfi\n\nif [ -f \"language-of-connection-communication-infographic.jpg\"\
+        \ ]"
+      permission: allow
+    - command: "then\n    echo \"\u2705 JPEG image found\"\nelse\n    echo \"\u274C\
+        \ JPEG image missing\"\nfi\n\n# Test HTML validity\nif grep -q \"<!DOCTYPE\
+        \ html>\" language-of-connection-blog-post.html"
+      permission: allow
+    - command: "then\n    echo \"\u2705 Valid HTML5 doctype\"\nelse\n    echo \"\u274C\
+        \ Missing doctype\"\nfi\n\nif grep -q \"</html>\" language-of-connection-blog-post.html"
+      permission: allow
+    - command: sed(\s.*)?
+      permission: allow
+    - command: nl(\s.*)?
+      permission: allow
+    - command: Platform(\s.*)?
+      permission: allow
+    - command: Ideal(\s.*)?
+      permission: allow
+    - command: Your(\s.*)?
+      permission: allow
+    - command: '----------(\s.*)?'
+      permission: allow
+    - command: '-----------(\s.*)?'
+      permission: allow
+    - command: '------------------(\s.*)?'
+      permission: allow
+    - command: Facebook(\s.*)?
+      permission: allow
+    - command: 1200x630px(\s.*)?
+      permission: allow
+    - command: "\u2705 Works (will crop)"
+      permission: allow
+    - command: Twitter(\s.*)?
+      permission: allow
+    - command: 1200x675px(\s.*)?
+      permission: allow
+    - command: LinkedIn(\s.*)?
+      permission: allow
+    - command: 1200x627px(\s.*)?
+      permission: allow
+    - command: Pinterest(\s.*)?
+      permission: allow
+    - command: 1000x1500px(\s.*)?
+      permission: allow
+    - command: "\u26A0\uFE0F Square (vertical preferred)"
+      permission: allow
+    - command: Instagram(\s.*)?
+      permission: allow
+    - command: 1080x1080px(\s.*)?
+      permission: allow
+    - command: "\u2705(\\s.*)?"
+      permission: allow
+    - command: Service(\s.*)?
+      permission: allow
+    - command: Cost(\s.*)?
+      permission: allow
+    - command: Notes(\s.*)?
+      permission: allow
+    - command: '---------(\s.*)?'
+      permission: allow
+    - command: '------(\s.*)?'
+      permission: allow
+    - command: '-------(\s.*)?'
+      permission: allow
+    - command: GitHub(\s.*)?
+      permission: allow
+    - command: FREE(\s.*)?
+      permission: allow
+    - command: Unlimited(\s.*)?
+      permission: allow
+    - command: WordPress.com(\s.*)?
+      permission: allow
+    - command: 3GB(\s.*)?
+      permission: allow
+    - command: env(\s.*)?
+      permission: allow
+    - command: chmod(\s.*)?
+      permission: allow
+    - command: "echo \"\U0001F50D Checking Prerequisites...\"\necho \"\"\necho \"\
+        1. Checking Terraform...\"\nif command -v terraform &> /dev/null"
+      permission: allow
+    - command: "then\n    terraform version"
+      permission: allow
+    - command: "then\n    echo \"   \u2705 SSH public key found at ~/.ssh/id_rsa.pub\"\
+        \n    echo \"   Key fingerprint:\"\n    ssh-keygen -lf ~/.ssh/id_rsa.pub"
+      permission: allow
+    - command: 'awk ''{print "   " $2}''
+
+        elif [ -f "$HOME/.ssh/id_ed25519.pub" ]'
+      permission: allow
+    - command: "then\n    echo \"   \u2705 SSH public key found at ~/.ssh/id_ed25519.pub\"\
+        \n    echo \"   Key fingerprint:\"\n    ssh-keygen -lf ~/.ssh/id_ed25519.pub"
+      permission: allow
+    # Run bash commands in a sandboxed environment - currently available for
+    # MacOS and Linux only. Enabling this option for Windows will prevent the
+    # agent from running powershell commands.
+    runInSandbox: false
+    # Environment variables to set when running bash commands. Env vars are
+    # automatically inherited from the user's environment, except for sensitive
+    # variables such as API tokens and passwords. Use this config to set
+    # additional env vars, or to pass secrets. Env vars can be set to strings or
+    # can reference other env vars using the ${VAR_NAME} syntax.
+    env: {}
+  # List of file or directory paths that are allowed to be accessed outside the
+  # workspace
+  allowedExternalPaths: []
+
+announcementTracking:
+  announcementViewCounts:
+    2b82cbeabae72a8568fc7c793403f0a7: 2
+
+sessionFeedback:
+  permanentlyDisabled: false
+  # ISO timestamp of the last provided feedback
+  lastFeedbackAsked: '2026-01-20T04:33:28.251511+00:00'
+
+atlassianBillingSite:
+  siteUrl: https://0braindrain.atlassian.net
+
+smartTasks:
+  # Enable Smart Tasks discovery
+  enabled: true
+  # List of task discovery sources
+  sources:
+  - filesystem
+
+# Event Hooks configuration. See /hooks command to list available events.
+eventHooks:
+  logFile: /root/.rovodev/event_hooks.log
+  events: []

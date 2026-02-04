@@ -1,0 +1,34 @@
+.button-group {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        justify-content: center;
+    }
+
+    button {
+        padding: 0.75rem 2rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-approve, .btn-primary {
+        background: #10b981;
+        color: #ffffff;
+        min-width: 120px;
+    }
+
+    .btn-deny, .btn-secondary {
+        background: #6b7280;
+        color: #ffffff;
+        min-width: 120px;
+    }

@@ -1,0 +1,110 @@
+.info-box {
+        background: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        color: #374151;
+    }
+
+    .info-box p {
+        margin-bottom: 0.5rem;
+    }
+
+    .info-box p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-box.centered {
+        text-align: center;
+    }
+
+    .info-box.error {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
+    }
+
+    .info-box strong {
+        color: #0ea5e9;
+        font-weight: 600;
+    }
+
+    .info-box .server-name-link {
+        color: #0ea5e9;
+        text-decoration: underline;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.15s;
+    }
+
+    .info-box .server-name-link:hover {
+        opacity: 0.8;
+    }
+
+    /* Monospace info box - gray styling with code font */
+    .info-box-mono {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 0.875rem;
+        margin: 1.25rem 0;
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-family: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+        text-align: left;
+    }
+
+    .info-box-mono.centered {
+        text-align: center;
+    }
+
+    .info-box-mono.error {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
+    }
+
+    .info-box-mono strong {
+        color: #111827;
+        font-weight: 600;
+    }
+
+    .warning-box {
+        background: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .warning-box p {
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+        color: #6b7280;
+        font-size: 0.9375rem;
+    }
+
+    .warning-box p:last-child {
+        margin-bottom: 0;
+    }
+
+    .warning-box strong {
+        color: #0ea5e9;
+        font-weight: 600;
+    }
+
+    .warning-box a {
+        color: #0ea5e9;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+
+    .warning-box a:hover {
+        color: #0284c7;
+        text-decoration: underline;
+    }

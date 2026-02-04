@@ -1,0 +1,22 @@
+# Hetzner Cloud Configuration
+hcloud_token = "your-hetzner-cloud-api-token"
+
+# Server Configuration
+server_type = "cx22"      # Options: cx22 (2vCPU/4GB), cx32 (4vCPU/8GB), cx42 (8vCPU/16GB)
+location    = "fsn1"      # Options: fsn1 (Falkenstein), nbg1 (Nuremberg), hel1 (Helsinki)
+
+# SSH Configuration
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+
+# Application Configuration
+wordpress_api_url = "https://your-wordpress-site.com/wp-json"
+openai_api_key    = "sk-..."
+anthropic_api_key = "sk-ant-..."
+
+# Site Configuration
+site_url         = "http://your-hetzner-ip"  # Update after deployment
+site_name        = "My AI Blog"
+site_description = "AI-powered content platform"
+
+# Optional: Stripe for monetization
+stripe_publishable_key = "pk_test_..."

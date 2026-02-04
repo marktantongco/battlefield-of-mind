@@ -1,0 +1,76 @@
+.help-link-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.help-link {
+  color: #6b7280;
+  text-decoration: none;
+  cursor: help;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #9ca3af;
+}
+
+@media (max-width: 640px) {
+  .help-link {
+    background: #ffffff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.help-link:hover {
+  color: #111827;
+  border-bottom-color: #111827;
+}
+
+.help-link:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  left: auto;
+  margin-bottom: 0.5rem;
+  background: #1f2937;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  width: 280px;
+  max-width: calc(100vw - 3rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  border: 6px solid transparent;
+  border-top-color: #1f2937;
+}
+
+.tooltip-link {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.close-instruction,
+.help-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 1.5rem;
+}

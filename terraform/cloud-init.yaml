@@ -1,0 +1,60 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - git
+  - ufw
+
+write_files:
+  - path: /root/.env
+    content: |
+%{ for key, value in env_vars ~}
+      ${key}=${value}
+%{ endfor ~}
+    permissions: '0600'
+
+  - path: /root/docker-compose.yml
+    content: |
+      ${indent(6, docker_compose)}
+    permissions: '0644'
+
+  - path: /root/nginx.conf
+    content: |
+      ${indent(6, nginx_conf)}
+    permissions: '0644'
+
+runcmd:
+  # Install Docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  
+  # Configure firewall
+  - ufw allow 22/tcp
+  - ufw allow 80/tcp
+  - ufw allow 443/tcp
+  - ufw --force enable
+  
+  # Clone repository and deploy
+  - cd /root
+  - git clone https://github.com/yourusername/ai-blog-platform.git app || true
+  - cd /root/app
+  - cp /root/.env .env
+  - cp /root/docker-compose.yml docker-compose.yml
+  - cp /root/nginx.conf nginx.conf
+  
+  # Start services
+  - docker compose pull
+  - docker compose up -d
+  
+  # Set up auto-updates
+  - echo "0 2 * * * cd /root/app && git pull && docker compose pull && docker compose up -d" | crontab -
+
+final_message: "OpenClaw Moltbot deployment complete! System ready after $UPTIME seconds"

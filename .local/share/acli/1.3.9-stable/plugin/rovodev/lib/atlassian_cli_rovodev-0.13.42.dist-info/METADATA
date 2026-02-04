@@ -1,0 +1,58 @@
+Metadata-Version: 2.4
+Name: atlassian-cli-rovodev
+Version: 0.13.42
+Summary: Our public RovoDev CLI product
+Requires-Python: <3.14,>=3.11
+Requires-Dist: agent-client-protocol==0.6.2
+Requires-Dist: atlassian-analytics-client>=0.16.0
+Requires-Dist: atlassian-cli-rovodev-tui
+Requires-Dist: atlassian-code-common
+Requires-Dist: atlassian-code-nemo>=0.4.4
+Requires-Dist: atlassian-mcp-atlassian-exp
+Requires-Dist: bashlex>=0.16
+Requires-Dist: cachetools>=5.0.0
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: hjson>=3.1.0
+Requires-Dist: httpx>=0.18.0
+Requires-Dist: humanize>=4.9.0
+Requires-Dist: logfire[httpx]<4.0.0,>=0.19.0
+Requires-Dist: loguru>=0.7.2
+Requires-Dist: mcp>=1.12.1
+Requires-Dist: opentelemetry-api<2.0.0,>=1.23.0
+Requires-Dist: opentelemetry-instrumentation-httpx>=0.54b0
+Requires-Dist: opentelemetry-instrumentation-requests>=0.54b0
+Requires-Dist: opentelemetry-sdk<2.0.0,>=1.23.0
+Requires-Dist: packaging>=23.0
+Requires-Dist: pillow>=10.0.0
+Requires-Dist: prompt-toolkit>=3.0.50
+Requires-Dist: pygls>=2.0.0a4
+Requires-Dist: pyperclip>=1.8.2
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: rich==14.2.0
+Requires-Dist: sse-starlette>=2.2.1
+Requires-Dist: tenacity>=9.0.0
+Requires-Dist: thefuzz>=0.19.0
+Requires-Dist: typer>=0.15.2
+Provides-Extra: voice
+Requires-Dist: faster-whisper>=1.0.0; extra == 'voice'
+Requires-Dist: sounddevice>=0.5.0; extra == 'voice'
+Requires-Dist: soundfile>=0.12.0; extra == 'voice'
+Description-Content-Type: text/markdown
+
+# RovoDev CLI
+
+This repository contains source code for the RovoDev CLI app.
+
+## Documentation
+
+- Experience ID (xid): The CLI supports an `--xid` flag to tag requests and analytics. Defaults to `rovodev-cli`. `--application-id` is deprecated and treated as an alias.
+
+
+- **[Serve Mode Documentation](https://developer.atlassian.com/platform/rovodev-cli/serve/)** - Comprehensive guide for running RovoDev CLI in server mode with REST API and SSE streaming
+
+## Development
+
+```bash
+uv sync
+uv run rovodev --help
+```
