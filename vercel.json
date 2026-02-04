@@ -1,11 +1,8 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "out",
+  "version": 2,
+  "name": "battlefield-of-mind",
   "framework": "nextjs",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ]
+  "buildCommand": "next build",
+  "installCommand": "npm install",
+  "devCommand": "next dev"
 }
