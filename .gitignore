@@ -36,3 +36,6 @@ next-env.d.ts
 
 # GitHub CLI config (contains tokens)
 .config/gh/
+
+# Rovo Dev local data
+.rovodev/
