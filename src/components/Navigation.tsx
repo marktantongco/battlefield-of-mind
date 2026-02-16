@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Brain, Sparkles, BookOpen, Home, Moon, Sun } from 'lucide-react';
+import { Menu, X, Brain, Sparkles, BookOpen, Home, Moon, Sun, Compass } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export function Navigation() {
@@ -24,6 +24,8 @@ export function Navigation() {
     { href: '/battlefield', label: 'Battlefield', icon: Brain },
     { href: '/mood-tracker', label: 'Mood Tracker', icon: Sparkles },
     { href: '/ai-tools', label: 'AI Tools', icon: BookOpen },
+    { href: '/ai-trial-blueprint', label: 'AI Trial Blueprint', icon: Compass },
+    { href: '/usage-dashboard/login', label: 'Dashboard', icon: BookOpen },
   ];
 
   return (
