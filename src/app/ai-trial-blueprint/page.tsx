@@ -340,12 +340,6 @@ const transitionPlan = [
   },
 ]
 
-export const metadata = {
-  title: "AI Free Trial Monetization Blueprint",
-  description:
-    "Interactive deep dive into free AI trial platforms and monetization workflows for zero-budget founders.",
-}
-
 export default function AiTrialBlueprintPage() {
   const [search, setSearch] = useState("")
   const [tierFilter, setTierFilter] = useState<PlatformTier | "All">("All")
