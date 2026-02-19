@@ -12,7 +12,7 @@
   "dependencies": {
     "@types/node": "^20.11.5",
     "@vercel/analytics": "^1.6.1",
-    "ai": "^3.0.0",
+    "ai": "^5.0.52",
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.5",
     "class-variance-authority": "^0.7.0",
@@ -20,7 +20,7 @@
     "framer-motion": "^11.18.2",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.323.0",
-    "next": "^14.1.0",
+    "next": "^16.1.6",
     "next-seo": "^6.8.0",
     "openai": "^4.26.0",
     "postcss": "^8.4.33",
